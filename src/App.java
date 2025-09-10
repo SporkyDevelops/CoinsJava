@@ -24,7 +24,7 @@ public class App {
         //Switched from int to long to increase max value (up to 9223372036854775806 coins)
         long[] numCoin = new long[4];
 
-        DecimalFormat currencyDecimalFormat = new DecimalFormat("$#.##");
+        DecimalFormat currencyDecimalFormat = new DecimalFormat("$0.00");
 
         System.out.println(ANSI_BLUE + "Welcome to Coin Program!");
 
