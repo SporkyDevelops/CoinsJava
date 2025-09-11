@@ -61,7 +61,13 @@ public class App {
 
             System.out.println( "\nPart 2: ");
 
+            double total = 0.0;
+            double totalInRoll = 0.0;
+            double totalExtra = 0.0;
+
             for (int i = 0; i < 4; i++){
+
+                total += numCoin[i]*value[i];
 
                 long numRoll = numCoin[i] / roll[i];
                 long extraCoin = numCoin[i] % roll[i];
@@ -70,26 +76,35 @@ public class App {
                 //e.g. (4 rolls * 40 * 0.25)
                 double valueInRoll = numRoll * roll[i] * value[i];
 
-                /* tested output
-                System.out.println(coin[i] + " " + numCoin[i] + " " + numRoll + " " + extraCoin + " " + moneyInRoll); */
+                totalInRoll += valueInRoll;
+                totalExtra += extraCoin * value[i];
 
-                System.out.println("There are: " + ANSI_GREEN + numRoll + CLEAR_ANSI + " rolls of " + ANSI_GREEN + coin[i] + CLEAR_ANSI);
+                if (numRoll > 0) {
+                    System.out.println("There are " + ANSI_GREEN + numRoll + CLEAR_ANSI + " rolls of " + ANSI_GREEN + coin[i] + CLEAR_ANSI);
+                    System.out.println("The total value of " + ANSI_GREEN + coin[i] + CLEAR_ANSI + " in rolls is: " + ANSI_GREEN + currencyDecimalFormat.format(valueInRoll) + CLEAR_ANSI);
 
-                System.out.println("There are: " + ANSI_RED + extraCoin + " " + coin[i] + CLEAR_ANSI + " extra");
+                }
+                else {
+                    System.out.println("There are not enough " + coin[i] + " to fill a roll.");
+                }
 
-                System.out.println("The total value of " + ANSI_GREEN + coin[i] + CLEAR_ANSI + " in rolls is: " + ANSI_GREEN + currencyDecimalFormat.format(valueInRoll) + CLEAR_ANSI);
-                System.out.println("The total value of " + ANSI_RED + coin[i] + CLEAR_ANSI + " extra coins is: " + ANSI_RED + currencyDecimalFormat.format(extraCoin * value[i]) + CLEAR_ANSI + "\n");
+                if (extraCoin > 0) {
+                    System.out.println("There are " + ANSI_RED + extraCoin + " " + coin[i] + CLEAR_ANSI + " extra.");
+                    System.out.println("The total value of extra " + ANSI_RED + coin[i] + CLEAR_ANSI + " is: " + ANSI_RED + currencyDecimalFormat.format(extraCoin * value[i]) + CLEAR_ANSI + "\n");
+
+                }
+                else {
+                    System.out.println("There are no extra " + coin[i] + "\n");
+                }
+
             }
 
-            System.out.println("\nPart 3:");
+            System.out.println("\nPart 3:" + ANSI_BLUE);
 
-            double total = 0.0;
-            for (int i = 0; i < 4; i++) {
+            System.out.println("The total value of all coins is: " + currencyDecimalFormat.format(total));
+            System.out.println("The total value of coins in rolls is: " + currencyDecimalFormat.format(totalInRoll));
+            System.out.println("The total value of extra coins is: " + currencyDecimalFormat.format(totalExtra));
 
-                total += numCoin[i]*value[i];
-            }
-
-            System.out.print(ANSI_BLUE + "The total value of all coins is: " + currencyDecimalFormat.format(total));
             
     }
 }
